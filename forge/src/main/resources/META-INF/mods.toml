@@ -1,0 +1,23 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="MIT"
+[[mods]]
+modId="${id}"
+version="${version}"
+displayName="${name}"
+logoFile="assets/${id}/icon.png"
+credits="${authors}"
+authors="${authors}"
+description="${description}"
+[[dependencies.${id}]]
+    modId = "minecraft"
+    mandatory = true
+    versionRange="[1.16.5,1.17)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.${id}]]
+    modId = "dirtcommons"
+    mandatory = true
+    versionRange = "[1.0.0,9.9.9]"
+    ordering = "NONE"
+    side = "BOTH"

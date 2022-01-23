@@ -1,0 +1,55 @@
+subprojects {
+    //apply plugin: 'java-library'
+    //apply plugin: 'java'
+    //apply plugin: 'maven'
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    //run $ git tag -a v1.0.0 -m "init." this will set up the build number. if this is not ran the project will kek itself.
+    def determinePatchVersion = {
+        // get the name of the last tag
+        def tagInfo = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'describe', "--tag"
+            standardOutput = tagInfo
+        }
+        tagInfo = tagInfo.toString()
+
+        if (!tagInfo.contains('-')) {
+            return 0
+        }
+        return tagInfo.split("-")[1]
+    }
+
+    project.ext.majorVersion = versionMajor
+    project.ext.minorVersion = versionMinor
+    project.ext.patchVersion = determinePatchVersion()
+    project.ext.apiVersion = project.ext.majorVersion + '.' + project.ext.minorVersion
+    project.ext.fullVersion = project.ext.apiVersion + '.' + project.ext.patchVersion
+
+    group = "${modGroup}.${modId}"
+    version = project.ext.patchVersion
+
+    project.ext.name = modName
+    project.ext.modid = modId
+    project.ext.group = group;
+    project.ext.authors = modAuthors
+    project.ext.vendor = modVendor;
+    project.ext.mixinConfig = "${project.ext.modid}.mixins.json"
+    project.ext.refmap = "${project.ext.modid}.refmap.json"
+
+    //sourceCompatibility = 1.8
+    //targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url = 'https://repo.spongepowered.org/maven' }
+        maven {
+            name = 'gradle-plugins'
+            url = 'https://plugins.gradle.org/m2'
+        }
+    }
+}
