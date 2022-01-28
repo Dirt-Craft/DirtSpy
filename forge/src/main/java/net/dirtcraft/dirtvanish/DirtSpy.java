@@ -8,7 +8,6 @@ import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -16,18 +15,18 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import java.nio.file.Path;
 import java.util.Collection;
 
-import static net.dirtcraft.dirtvanish.DirtVanish.MOD_ID;
+import static net.dirtcraft.dirtvanish.DirtSpy.MOD_ID;
 import static net.minecraft.command.Commands.argument;
 import static net.minecraft.command.Commands.literal;
 
 @Mod(MOD_ID)
-public class DirtVanish {
-    public static final String MOD_ID = "dirtvanish";
+public class DirtSpy {
+    public static final String MOD_ID = "dirtspy";
     public static Path CONFIG_PATH = FMLPaths.GAMEDIR.get().resolve(FMLPaths.CONFIGDIR.get()).resolve(MOD_ID);
     public VanishConfig config = new VanishConfig(CONFIG_PATH.resolve("userdata"));
     CommandVanish vanish = new CommandVanish();
 
-    public DirtVanish(){
+    public DirtSpy(){
         MinecraftForge.EVENT_BUS.register(this);
     }
 
