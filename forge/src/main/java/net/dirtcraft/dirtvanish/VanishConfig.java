@@ -1,14 +1,13 @@
 package net.dirtcraft.dirtvanish;
 
-import net.dirtcraft.dirtcommons.config.NBTConfig;
+import net.dirtcraft.dirtcommons.config.PlayerDataNBT;
 import net.dirtcraft.dirtcommons.core.api.ForgePlayer;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
 import java.nio.file.Path;
 
-public class VanishConfig extends NBTConfig<VanishConfig.Settings> {
+public class VanishConfig extends PlayerDataNBT<VanishConfig.Settings> {
 
     public VanishConfig(Path folder) {
         super(folder, Settings::new);
